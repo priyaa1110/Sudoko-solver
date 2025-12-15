@@ -1,4 +1,6 @@
-const { animate } = anime;
+import { recordGameCompletion, currentUser } from './firebase.js';
+
+const animate = anime.anime || anime;
 
 const gameState = {
     grid: Array(6).fill(null).map(() => Array(6).fill(0)),
@@ -317,15 +319,29 @@ function animateError(row, col) {
     }, 1000);
 }
 
-function checkVictory() {
+async function checkVictory() {
     for (let row = 0; row < 6; row++) {
         for (let col = 0; col < 6; col++) {
             if (gameState.grid[row][col] === 0) return;
-            if (!isValid(gameState.grid, row, col, gameState.grid[row][col])) return;
+        }
+    }
+    
+    for (let row = 0; row < 6; row++) {
+        for (let col = 0; col < 6; col++) {
+            const num = gameState.grid[row][col];
+            if (!isValid(gameState.grid, row, col, num)) {
+                return;
+            }
         }
     }
     
     clearInterval(gameState.timerInterval);
+    
+    const timeInSeconds = Math.floor(gameState.elapsedTime / 1000);
+    if (currentUser) {
+        await recordGameCompletion(currentUser.uid, timeInSeconds);
+    }
+    
     celebrateVictory();
 }
 
