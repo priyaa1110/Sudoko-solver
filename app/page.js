@@ -13,6 +13,8 @@ import GameStats from '../components/GameStats';
 import SettingsModal from '../components/SettingsModal';
 import RoomManager from '../components/RoomManager';
 import Leaderboard from '../components/Leaderboard';
+import ProfilePage from '../components/ProfilePage';
+import ThemePicker from '../components/ThemePicker';
 
 export default function Home() {
   const { gameStarted, gameCompleted, timer, resetGame } = useGameStore();
@@ -22,6 +24,8 @@ export default function Home() {
   const [showSettings, setShowSettings] = useState(false);
   const [showRoom, setShowRoom] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
+  const [showThemePicker, setShowThemePicker] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthChange((authUser) => {
@@ -102,15 +106,19 @@ export default function Home() {
       <main className="menu-screen">
         <DifficultyMenu onStart={() => {}} />
         <div className="menu-actions">
+          <button onClick={() => setShowProfile(true)}>Profile</button>
+          <button onClick={() => setShowLeaderboard(true)}>Leaderboard</button>
           <button onClick={() => setShowRoom(!showRoom)}>
             {showRoom ? 'Hide' : 'Show'} Multiplayer
           </button>
-          <button onClick={() => setShowLeaderboard(true)}>Leaderboard</button>
+          <button onClick={() => setShowThemePicker(true)}>Themes</button>
           <button onClick={() => setShowSettings(true)}>Settings</button>
         </div>
         {showRoom && <RoomManager onRoomJoined={(code, diff) => {}} />}
         <SettingsModal isOpen={showSettings} onClose={() => setShowSettings(false)} />
         <Leaderboard isOpen={showLeaderboard} onClose={() => setShowLeaderboard(false)} />
+        <ProfilePage isOpen={showProfile} onClose={() => setShowProfile(false)} />
+        <ThemePicker isOpen={showThemePicker} onClose={() => setShowThemePicker(false)} />
       </main>
     );
   }
@@ -121,6 +129,9 @@ export default function Home() {
         <h1>Sudoku</h1>
         <div className="header-actions">
           <button onClick={handleNewGame}>New Game</button>
+          <button onClick={() => setShowProfile(true)}>Profile</button>
+          <button onClick={() => setShowLeaderboard(true)}>Leaderboard</button>
+          <button onClick={() => setShowThemePicker(true)}>Themes</button>
           <button onClick={() => setShowSettings(true)}>Settings</button>
         </div>
       </div>
@@ -145,6 +156,9 @@ export default function Home() {
       )}
 
       <SettingsModal isOpen={showSettings} onClose={() => setShowSettings(false)} />
+      <Leaderboard isOpen={showLeaderboard} onClose={() => setShowLeaderboard(false)} />
+      <ProfilePage isOpen={showProfile} onClose={() => setShowProfile(false)} />
+      <ThemePicker isOpen={showThemePicker} onClose={() => setShowThemePicker(false)} />
     </main>
   );
 }

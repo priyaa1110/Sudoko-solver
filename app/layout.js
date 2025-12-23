@@ -1,4 +1,5 @@
 import './globals.css';
+import ThemedWrapper from '../components/ThemedWrapper';
 
 export const metadata = {
   title: 'Sudoko Solver',
@@ -8,7 +9,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ThemedWrapper>{children}</ThemedWrapper>
+      </body>
     </html>
   );
 }
