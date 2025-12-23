@@ -17,7 +17,7 @@ import ProfilePage from '../components/ProfilePage';
 import ThemePicker from '../components/ThemePicker';
 
 export default function Home() {
-  const { gameStarted, gameCompleted, timer, resetGame } = useGameStore();
+  const { gameStarted, gameCompleted, timer, resetGame, solvedManually } = useGameStore();
   const [user, setUser] = useState(null);
   const [username, setUsername] = useState('');
   const [showLogin, setShowLogin] = useState(true);
@@ -39,10 +39,10 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (gameCompleted && user) {
+    if (gameCompleted && user && solvedManually) {
       handleGameComplete();
     }
-  }, [gameCompleted, user]);
+  }, [gameCompleted, user, solvedManually]);
 
   const handleLogin = async () => {
     if (!username.trim()) return;
@@ -145,7 +145,7 @@ export default function Home() {
       <NumberPad />
       <GameControls />
 
-      {gameCompleted && (
+      {gameCompleted && solvedManually && (
         <div className="completion-modal">
           <div className="completion-content">
             <h2>Puzzle Solved!</h2>

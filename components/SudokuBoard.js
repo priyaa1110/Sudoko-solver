@@ -14,7 +14,8 @@ export default function SudokuBoard() {
     placeNumber,
     mode,
     candidates,
-    settings 
+    settings,
+    hintCell
   } = useGameStore();
 
   if (!board) return null;
@@ -52,6 +53,10 @@ export default function SudokuBoard() {
     return num !== 0 && hasConflict(board, row, col, num);
   };
 
+  const isHintCell = (row, col) => {
+    return hintCell && hintCell.row === row && hintCell.col === col;
+  };
+
   return (
     <div className="sudoku-board">
       {board.map((row, rowIndex) => (
@@ -73,6 +78,7 @@ export default function SudokuBoard() {
                   'cell-highlight-box': settings.highlightBox && isInSameBox(rowIndex, colIndex),
                   'cell-identical': settings.highlightIdentical && hasIdenticalNumber(rowIndex, colIndex),
                   'cell-conflict': cellHasConflict(rowIndex, colIndex),
+                  'cell-hint': isHintCell(rowIndex, colIndex),
                   'cell-border-right': (colIndex + 1) % 3 === 0 && colIndex !== 8,
                   'cell-border-bottom': (rowIndex + 1) % 3 === 0 && rowIndex !== 8,
                 })}

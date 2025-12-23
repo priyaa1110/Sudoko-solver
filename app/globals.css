@@ -231,6 +231,16 @@ input:focus {
   color: var(--textConflict, #c62828);
 }
 
+.cell-hint {
+  background: #ffd700 !important;
+  animation: hintPulse 0.5s ease-in-out 3;
+}
+
+@keyframes hintPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
 .cell-border-right {
   border-right: 3px solid var(--cellBorder, #333);
 }
@@ -624,4 +634,224 @@ input:focus {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text, #333);
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .login-container,
+  .difficulty-menu {
+    padding: 2rem 1.5rem;
+    width: 100%;
+  }
+
+  .difficulty-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .difficulty-button {
+    width: 100%;
+  }
+
+  .menu-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .menu-actions button {
+    width: 100%;
+  }
+
+  .game-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .header-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .header-actions button {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .game-stats {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    justify-content: center;
+  }
+
+  .stat {
+    min-width: 80px;
+  }
+
+  .sudoku-board {
+    padding: 0.5rem;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .cell {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cell-number {
+    font-size: 1.25rem;
+  }
+
+  .cell-candidates {
+    padding: 1px;
+  }
+
+  .candidate {
+    font-size: 0.5rem;
+  }
+
+  .number-pad {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 100%;
+  }
+
+  .number-button {
+    padding: 0.75rem;
+    font-size: 1.1rem;
+  }
+
+  .clear-button {
+    grid-column: span 3;
+  }
+
+  .game-controls {
+    max-width: 100%;
+  }
+
+  .control-group {
+    flex-direction: column;
+  }
+
+  .control-button {
+    width: 100%;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 1.5rem;
+    max-height: 90vh;
+  }
+
+  .theme-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .theme-option {
+    padding: 0.75rem;
+  }
+
+  .theme-preview-cell {
+    width: 25px;
+    height: 25px;
+  }
+
+  .profile-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-stat-card {
+    padding: 1rem;
+  }
+
+  .profile-avatar {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .room-manager,
+  .room-info {
+    max-width: 100%;
+  }
+
+  .create-buttons {
+    flex-direction: column;
+  }
+
+  .create-buttons button {
+    width: 100%;
+  }
+
+  .leaderboard-item {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .leaderboard-item .rank {
+    min-width: 30px;
+  }
+
+  button {
+    padding: 0.65rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  input {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cell {
+    width: 35px;
+    height: 35px;
+  }
+
+  .cell-number {
+    font-size: 1.1rem;
+  }
+
+  .sudoku-board {
+    padding: 0.25rem;
+  }
+
+  .game-stats {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .stat {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .number-pad {
+    gap: 0.35rem;
+  }
+
+  .number-button {
+    padding: 0.6rem;
+    font-size: 1rem;
+  }
+
+  .theme-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header-actions button {
+    min-width: 100px;
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+  }
 }
