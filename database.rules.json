@@ -1,0 +1,75 @@
+{
+  "rules": {
+    "sudoko-solver": {
+      "profiles": {
+        "$userId": {
+          ".read": true,
+          ".write": "$userId === auth.uid",
+          ".validate": "newData.hasChildren(['username', 'createdAt', 'bestTime', 'gamesPlayed'])",
+          "username": {
+            ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 50"
+          },
+          "createdAt": {
+            ".validate": "newData.isNumber()"
+          },
+          "bestTime": {
+            ".validate": "newData.val() === null || newData.isNumber()"
+          },
+          "gamesPlayed": {
+            ".validate": "newData.isNumber() && newData.val() >= 0"
+          }
+        }
+      },
+      "leaderboard": {
+        "$userId": {
+          ".read": true,
+          ".write": "$userId === auth.uid",
+          ".validate": "newData.hasChildren(['username', 'time', 'timestamp'])",
+          "username": {
+            ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 50"
+          },
+          "time": {
+            ".validate": "newData.isNumber() && newData.val() > 0"
+          },
+          "timestamp": {
+            ".validate": "newData.isNumber()"
+          }
+        }
+      },
+      "rooms": {
+        "$roomCode": {
+          ".read": true,
+          ".write": "auth != null",
+          "code": {
+            ".validate": "newData.isString()"
+          },
+          "host": {
+            ".validate": "newData.isString()"
+          },
+          "hostUsername": {
+            ".validate": "newData.isString()"
+          },
+          "difficulty": {
+            ".validate": "newData.isString() && (newData.val() === 'easy' || newData.val() === 'medium' || newData.val() === 'hard')"
+          },
+          "createdAt": {
+            ".validate": "newData.isNumber()"
+          },
+          "players": {
+            "$playerId": {
+              ".validate": "newData.hasChildren(['username', 'joinedAt'])"
+            }
+          },
+          "gameState": {
+            ".validate": "newData.val() === null || newData.isString()"
+          },
+          "moves": {
+            "$moveId": {
+              ".validate": "newData.hasChildren(['userId', 'move', 'timestamp'])"
+            }
+          }
+        }
+      }
+    }
+  }
+}
